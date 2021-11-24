@@ -482,7 +482,7 @@ function RegisterPatienForm() {
                 type="submit"
                 style={{
                   borderRadius: "15px",
-                  padding: ".75rem",
+                  padding: "1.1rem",
                 }}
               >
                 บันทึกข้อมูล
