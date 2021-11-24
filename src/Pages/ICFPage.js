@@ -7,7 +7,7 @@ import ICFForm from "../Components/ICFForm/ICFForm";
 function ICFPage() {
   return (
     <div>
-      <Hometab activetab="/icf" />
+      <Hometab activetab="icf" />
       <ICFForm />
       <Footer />
     </div>

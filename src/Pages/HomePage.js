@@ -7,7 +7,7 @@ import RegisterPatienForm from "../Components/RegisterPatientForm/RegisterPatien
 function HomePage() {
   return (
     <div>
-      <Hometab activetab="/home"/>
+      <Hometab activetab="home"/>
       <RegisterPatienForm />
       <Footer />
     </div>

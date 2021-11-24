@@ -38,7 +38,6 @@ function LoginForm() {
         <Button
           className="w-50"
           variant="primary"
-          type="submit"
           style={{ borderRadius: "15px", padding: ".5rem" }}
         >
           <Link to="/home" style={{ textDecoration: "none" ,color:"white"}}>
