@@ -41,7 +41,9 @@ function LoginForm() {
           type="submit"
           style={{ borderRadius: "15px", padding: ".5rem" }}
         >
-          เข้าสู่ระบบ
+          <Link to="/home" style={{ textDecoration: "none" ,color:"white"}}>
+            เข้าสู่ระบบ
+          </Link>
         </Button>
         <br></br>
         <br></br>
