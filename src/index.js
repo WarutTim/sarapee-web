@@ -15,7 +15,7 @@ import HomePage from "./Pages/HomePage";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter  basename={'/sarapee-web'}>
       <App />
 
       <Routes>
