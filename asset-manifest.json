@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/sarapee-web/static/css/main.14e3b312.chunk.css",
-    "main.js": "/sarapee-web/static/js/main.11ead322.chunk.js",
-    "main.js.map": "/sarapee-web/static/js/main.11ead322.chunk.js.map",
+    "main.js": "/sarapee-web/static/js/main.df4b55f9.chunk.js",
+    "main.js.map": "/sarapee-web/static/js/main.df4b55f9.chunk.js.map",
     "runtime-main.js": "/sarapee-web/static/js/runtime-main.cdfe5df4.js",
     "runtime-main.js.map": "/sarapee-web/static/js/runtime-main.cdfe5df4.js.map",
     "static/css/2.383c0125.chunk.css": "/sarapee-web/static/css/2.383c0125.chunk.css",
-    "static/js/2.580f8a4f.chunk.js": "/sarapee-web/static/js/2.580f8a4f.chunk.js",
-    "static/js/2.580f8a4f.chunk.js.map": "/sarapee-web/static/js/2.580f8a4f.chunk.js.map",
+    "static/js/2.392a1042.chunk.js": "/sarapee-web/static/js/2.392a1042.chunk.js",
+    "static/js/2.392a1042.chunk.js.map": "/sarapee-web/static/js/2.392a1042.chunk.js.map",
     "index.html": "/sarapee-web/index.html",
     "static/css/2.383c0125.chunk.css.map": "/sarapee-web/static/css/2.383c0125.chunk.css.map",
     "static/css/main.14e3b312.chunk.css.map": "/sarapee-web/static/css/main.14e3b312.chunk.css.map",
-    "static/js/2.580f8a4f.chunk.js.LICENSE.txt": "/sarapee-web/static/js/2.580f8a4f.chunk.js.LICENSE.txt",
+    "static/js/2.392a1042.chunk.js.LICENSE.txt": "/sarapee-web/static/js/2.392a1042.chunk.js.LICENSE.txt",
     "static/media/Logo.b662e0a6.png": "/sarapee-web/static/media/Logo.b662e0a6.png",
     "static/media/Search.2be46f66.png": "/sarapee-web/static/media/Search.2be46f66.png"
   },
   "entrypoints": [
     "static/js/runtime-main.cdfe5df4.js",
     "static/css/2.383c0125.chunk.css",
-    "static/js/2.580f8a4f.chunk.js",
+    "static/js/2.392a1042.chunk.js",
     "static/css/main.14e3b312.chunk.css",
-    "static/js/main.11ead322.chunk.js"
+    "static/js/main.df4b55f9.chunk.js"
   ]
 }
