@@ -16,12 +16,13 @@ function InfoPatientForm() {
     <Container className="p-3">
       <h4 className="text-center p-3">ข้อมูลผู้พิการ</h4>
       <Row>
-        <Col lg={5} className="p-3">
+        <Col lg={12} className="p-3">
           <Image src={ImageBlank} className="mx-auto d-block" thumbnail></Image>
           <br></br>
         </Col>
-
-        <Col lg={7}>
+      </Row>
+      <Row>
+        <Col lg={12}>
           <Row>
             <Col md={4}>
               <FloatingLabel controlId="floatingInputGrid" label="HN">
