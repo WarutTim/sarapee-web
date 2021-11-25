@@ -7,7 +7,10 @@ import {
   Form,
   FloatingLabel,
   Table,
+  Button,
 } from "react-bootstrap";
+
+import { Link } from "react-router-dom";
 
 function SearchForm() {
   return (
@@ -46,6 +49,7 @@ function SearchForm() {
                 <th>การวินิจฉัยโรค</th>
                 <th>สาเหตุอาการ</th>
                 <th>คะแนน BI</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -58,6 +62,20 @@ function SearchForm() {
                 <td></td>
                 <td></td>
                 <td></td>
+                <td>
+                  <Button
+                    className="w-100"
+                    variant="primary"
+                    style={{ borderRadius: "15px", padding: ".5rem" }}
+                  >
+                    <Link
+                      to="/infopatient"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      ดูข้อมูล
+                    </Link>
+                  </Button>
+                </td>
               </tr>
             </tbody>
           </Table>
