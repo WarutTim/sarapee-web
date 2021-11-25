@@ -335,7 +335,7 @@ function RegisterPatienForm() {
               <Card.Body>
                 <Col>
                   {imageURLs.map((imageSrc) => (
-                    <Image src={imageSrc} thumbnail />
+                    <Image src={imageSrc} style={{minHeight:"20.2rem",maxHeifht:"20.2rem"}} thumbnail/>
                   ))}
                   <br></br>
                   <br></br>

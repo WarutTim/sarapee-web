@@ -15,6 +15,8 @@ import HomePage from "./Pages/HomePage";
 import SearchPage from "./Pages/SearchPage";
 import RegisterPatienPage from "./Pages/RegisterPatienPage";
 
+import InfoPatientPage from "./Pages/InfoPatientPage";
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename={"/sarapee-web"}>
@@ -28,9 +30,11 @@ ReactDOM.render(
 
         <Route path="/registerpatien" element={<RegisterPatienPage />}></Route>
         <Route path="/icf" element={<ICFPage />}></Route>
-        
+
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/search" element={<SearchPage />}></Route>
+
+        <Route path="/infopatient" element={<InfoPatientPage />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

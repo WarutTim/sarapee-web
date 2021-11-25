@@ -4,25 +4,25 @@ import Footer from "../Components/Footer/Footer";
 import Hometab from "../Components/Hometab/Hometab";
 import HometabRight from "../Components/Hometab/HometabRight";
 
-import ICFForm from "../Components/ICFForm/ICFForm";
+import { Col, Row } from "react-bootstrap";
+import InfoPatientForm from "../Components/InfoPatientForm/InfoPatientForm";
 
-import { Row, Col } from "react-bootstrap"; 
-function ICFPage() {
+function InfoPatientPage() {
   return (
     <div>
       <Row>
         <Col md={9} lg={10}>
-          <Hometab activetab="icf" />
+          <Hometab />
+        </Col>
+        <Col md={3} lg={2}>
+          <HometabRight activetab="search" />
         </Col>
 
-        <Col md={3} lg={2}>
-          <HometabRight/>
-        </Col>
       </Row>
-      <ICFForm />
+      <InfoPatientForm />
       <Footer />
     </div>
   );
 }
 
-export default ICFPage;
+export default InfoPatientPage;

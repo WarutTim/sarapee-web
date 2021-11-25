@@ -20,7 +20,7 @@ function Datetime() {
     }, 1000);
   }, []);
 
-  return <div>{clockState}</div>;
+  return <div style={{fontSize:"1rem"}}>{clockState}</div>;
 }
 
 export default Datetime;

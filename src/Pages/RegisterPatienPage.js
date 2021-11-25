@@ -11,10 +11,10 @@ function RegisterPatienPage() {
   return (
     <div>
       <Row>
-        <Col lg={8}>
+        <Col md={9} lg={10}>
           <Hometab activetab="registerpatien" />
         </Col>
-        <Col lg={4}>
+        <Col md={3} lg={2}>
           <HometabRight />
         </Col>
       </Row>

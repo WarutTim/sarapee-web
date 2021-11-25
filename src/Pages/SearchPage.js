@@ -12,11 +12,12 @@ function SearchPage() {
   return (
     <div>
       <Row>
-        <Col lg={8}>
-          <Hometab  />
+        <Col md={9} lg={10}>
+          <Hometab />
         </Col>
-        <Col lg={4}>
-          <HometabRight activetab="search"/>
+
+        <Col md={3} lg={2}>
+          <HometabRight activetab="search" />
         </Col>
       </Row>
       <SearchForm />
