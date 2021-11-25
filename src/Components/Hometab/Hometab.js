@@ -5,9 +5,14 @@ import { Link } from "react-router-dom";
 
 function Hometab(props) {
   return (
-    <Nav variant="tabs" defaultActiveKey={props.activetab}>
+    <Nav variant="tabs" defaultActiveKey={props.activetab} lg={6}>
       <Nav.Item>
-        <Nav.Link as={Link} to="/home" style={{ color: "black" }} eventKey="home">
+        <Nav.Link
+          as={Link}
+          to="/home"
+          style={{ color: "black" }}
+          eventKey="home"
+        >
           ลงทะเบียน
         </Nav.Link>
       </Nav.Item>
@@ -26,7 +31,6 @@ function Hometab(props) {
           ICF
         </Nav.Link>
       </Nav.Item>
-      <Nav.Item></Nav.Item>
     </Nav>
   );
 }

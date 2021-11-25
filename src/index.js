@@ -10,8 +10,9 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import ChangePasswordPage from "./Pages/ChangePassword";
 import ICFPage from "./Pages/ICFPage";
-
 import HomePage from "./Pages/HomePage";
+import SearchPage from "./Pages/SearchPage"
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -27,6 +28,8 @@ ReactDOM.render(
 
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/icf" element={<ICFPage />}></Route>
+
+        <Route path="/search" element={<SearchPage />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

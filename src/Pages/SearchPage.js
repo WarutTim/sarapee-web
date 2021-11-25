@@ -1,27 +1,28 @@
 import React from "react";
 
-import ChangePasswordForm from "../Components/ChangePasswordForm/ChangePasswordForm";
 import Footer from "../Components/Footer/Footer";
 import Hometab from "../Components/Hometab/Hometab";
 import HometabRight from "../Components/Hometab/HometabRight";
+import RegisterPatienForm from "../Components/RegisterPatientForm/RegisterPatienForm";
+import SearchForm from "../Components/SearchForm/SearchForm";
 
 import { Col, Row } from "react-bootstrap";
 
-function ChangePasswordPage() {
+function SearchPage() {
   return (
     <div>
       <Row>
         <Col lg={6}>
-          <Hometab />
+          <Hometab  />
         </Col>
         <Col lg={6}>
-          <HometabRight activetab="changepassword" />
+          <HometabRight activetab="search"/>
         </Col>
       </Row>
-      <ChangePasswordForm />
+      <SearchForm />
       <Footer />
     </div>
   );
 }
 
-export default ChangePasswordPage;
+export default SearchPage;
