@@ -10,13 +10,14 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import ChangePasswordPage from "./Pages/ChangePassword";
 import ICFPage from "./Pages/ICFPage";
-import HomePage from "./Pages/HomePage";
-import SearchPage from "./Pages/SearchPage"
 
+import HomePage from "./Pages/HomePage";
+import SearchPage from "./Pages/SearchPage";
+import RegisterPatienPage from "./Pages/RegisterPatienPage";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter  basename={'/sarapee-web'}>
+    <BrowserRouter basename={"/sarapee-web"}>
       <App />
 
       <Routes>
@@ -25,10 +26,10 @@ ReactDOM.render(
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/changepassword" element={<ChangePasswordPage />}></Route>
 
-
-        <Route path="/home" element={<HomePage />}></Route>
+        <Route path="/registerpatien" element={<RegisterPatienPage />}></Route>
         <Route path="/icf" element={<ICFPage />}></Route>
-
+        
+        <Route path="/home" element={<HomePage />}></Route>
         <Route path="/search" element={<SearchPage />}></Route>
       </Routes>
     </BrowserRouter>

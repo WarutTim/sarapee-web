@@ -28,7 +28,6 @@ function SearchForm() {
             <Form.Select style={{ borderRadius: "15px" }}>
               <option>ค่าเริ่มต้น</option>
               <option>เรียงตามบัตรประชาชน</option>
-              <option>FOLEY</option>
             </Form.Select>
           </FloatingLabel>
           <br></br>
@@ -50,16 +49,16 @@ function SearchForm() {
               </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
             </tbody>
           </Table>
         </Col>

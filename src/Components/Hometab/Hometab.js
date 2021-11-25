@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { Container, Nav } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -9,9 +9,10 @@ function Hometab(props) {
       <Nav.Item>
         <Nav.Link
           as={Link}
-          to="/home"
+          to="/registerpatien"
           style={{ color: "black" }}
-          eventKey="home"
+          eventKey="registerpatien"
+          fluid
         >
           ลงทะเบียน
         </Nav.Link>

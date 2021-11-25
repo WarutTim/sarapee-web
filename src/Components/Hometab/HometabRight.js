@@ -8,11 +8,11 @@ function HometabRight(props) {
     <Nav
       variant="tabs"
       defaultActiveKey={props.activetab}
-      lg={6}
       className="justify-content-end"
+      fluid
     >
       <Nav.Item>
-        <Nav.Link as={Link} to="#1" style={{ color: "black" }} eventKey="#1">
+        <Nav.Link as={Link} to="/home" style={{ color: "black" }} eventKey="home">
           หน้าแรก
         </Nav.Link>
       </Nav.Item>

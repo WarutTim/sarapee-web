@@ -17,6 +17,10 @@ function RegisterPatienForm() {
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
 
+  if (!images.length) {
+    imageURLs[0] = ImageBlank;
+  }
+
   useEffect(() => {
     if (images.length < 1) return;
     const newImageUrls = [];

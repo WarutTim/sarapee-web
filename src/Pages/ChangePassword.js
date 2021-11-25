@@ -11,10 +11,10 @@ function ChangePasswordPage() {
   return (
     <div>
       <Row>
-        <Col lg={6}>
+        <Col lg={8}>
           <Hometab />
         </Col>
-        <Col lg={6}>
+        <Col lg={4}>
           <HometabRight activetab="changepassword" />
         </Col>
       </Row>
