@@ -24,7 +24,7 @@ function RegisterForm() {
         registerEmail,
         registerPassword
       );
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.log(error.message);
     }

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Navbar, Image, Button } from "react-bootstrap";
+import { Navbar, Image, Button, Nav, Container } from "react-bootstrap";
 
 import Logo from "./img/Logo.png";
 import Datetime from "../Datetime/Datetime";
 
 import { auth } from "../../Config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   let navigate = useNavigate();
@@ -21,25 +21,47 @@ function Header() {
     }
   };
 
-  let button;
+  let buttonLogout;
+  let textNameUser;
   if (user) {
-    button = <Button onClick={logout}>ออกจากระบบ</Button>;
+    buttonLogout = (
+      <Button
+        className="mr-auto"
+        onClick={logout}
+        style={{ borderRadius: "15px" }}
+      >
+        ออกจากระบบ
+      </Button>
+    );
+    textNameUser = <Nav.Link>User : {user?.email}</Nav.Link>;
+  } else {
+    buttonLogout = (
+      <Button
+        className="mr-auto"
+        as={Link}
+        to="/"
+        style={{ borderRadius: "15px" }}
+      >
+        เข้าสู่ระบบ
+      </Button>
+    );
   }
 
   return (
-    <Navbar bg="light" className="p-2">
+    <Navbar bg="light" expand="lg" className="p-2">
       <Navbar.Brand>
-        <Datetime />
+        <Image src={Logo} style={{ width: "10rem" }}></Image>
       </Navbar.Brand>
 
-      <Navbar.Toggle />
-      <Navbar.Collapse className="justify-content-center">
-        <Navbar.Text>User : {user?.email}</Navbar.Text>
-      </Navbar.Collapse>
-      <Navbar.Collapse className="justify-content-end">
-        <Image src={Logo} style={{ width: "10rem" }}></Image>
-
-        {button}
+      <Navbar.Toggle aria-controls="navbarScroll" />
+      <Navbar.Collapse id="navbarScroll" className="justify-content-end">
+        <Nav className="mr-auto">
+          <Nav.Link className="pe-3">
+            <Datetime />
+          </Nav.Link>
+          {textNameUser}
+        </Nav>
+        {buttonLogout}
       </Navbar.Collapse>
     </Navbar>
   );

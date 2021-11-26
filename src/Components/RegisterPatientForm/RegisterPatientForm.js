@@ -25,8 +25,8 @@ function RegisterPatienForm() {
     setUser(currentUser);
   });
 
-  if(!user){
-    navigate("/")
+  if (!user) {
+    navigate("/");
   }
 
   // Image Preview
