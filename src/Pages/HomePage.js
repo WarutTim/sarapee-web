@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Footer from "../Components/Footer/Footer";
 import Hometab from "../Components/Hometab/Hometab";
@@ -11,10 +11,10 @@ function HomePage() {
     <div>
       <Row>
         <Col md={9} lg={10}>
-          <Hometab/>
+          <Hometab />
         </Col>
         <Col md={3} lg={2}>
-        <HometabRight activetab="home" />
+          <HometabRight activetab="home" />
         </Col>
       </Row>
 

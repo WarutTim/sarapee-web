@@ -3,16 +3,16 @@ import React from "react";
 import Footer from "../Components/Footer/Footer";
 import Hometab from "../Components/Hometab/Hometab";
 import HometabRight from "../Components/Hometab/HometabRight";
-import RegisterPatienForm from "../Components/RegisterPatientForm/RegisterPatienForm";
+import RegisterPatienForm from "../Components/RegisterPatientForm/RegisterPatientForm";
 
 import { Col, Row } from "react-bootstrap";
 
-function RegisterPatienPage() {
+function RegisterPatientPage() {
   return (
     <div>
       <Row>
         <Col md={9} lg={10}>
-          <Hometab activetab="registerpatien" />
+          <Hometab activetab="registerpatient" />
         </Col>
         <Col md={3} lg={2}>
           <HometabRight />
@@ -24,4 +24,4 @@ function RegisterPatienPage() {
   );
 }
 
-export default RegisterPatienPage;
+export default RegisterPatientPage;

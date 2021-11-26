@@ -1,8 +1,5 @@
 import React from "react";
-
-import { Container, Form, FloatingLabel, Button, Row } from "react-bootstrap";
-
-import { Link } from "react-router-dom";
+import { Container, Form, FloatingLabel, Button } from "react-bootstrap";
 
 function ChangePasswordForm() {
   return (

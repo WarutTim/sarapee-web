@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import {
   Container,
   Col,
@@ -11,30 +10,44 @@ import {
   Image,
 } from "react-bootstrap";
 
+import { auth } from "../../Config";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 import ImageBlank from "./img/Profile.png";
 
 function RegisterPatienForm() {
+  // Auth
+  let navigate = useNavigate();
+  const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  if(!user){
+    navigate("/")
+  }
+
+  // Image Preview
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
-
   if (!images.length) {
     imageURLs[0] = ImageBlank;
   }
-
   useEffect(() => {
     if (images.length < 1) return;
     const newImageUrls = [];
     images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
     setImageURLs(newImageUrls);
   }, [images]);
-
   function onImageChange(e) {
     setImages([...e.target.files]);
   }
 
   return (
     <Container className="d-grid p-3">
-      <Form>
+      <Form id="addUser">
         <h4>ข้อมูลเวชทะเบียนผู้พิการ</h4>
         <br></br>
         <Row>
@@ -79,6 +92,7 @@ function RegisterPatienForm() {
             <FloatingLabel controlId="floatingInputGrid" label="ชื่อ">
               <Form.Control
                 type="text"
+                name="fname"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
               />
@@ -90,6 +104,7 @@ function RegisterPatienForm() {
             <FloatingLabel controlId="floatingInputGrid" label="นามสกุล">
               <Form.Control
                 type="text"
+                name="lname"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
               />
@@ -335,7 +350,11 @@ function RegisterPatienForm() {
               <Card.Body>
                 <Col>
                   {imageURLs.map((imageSrc) => (
-                    <Image src={imageSrc} style={{minHeight:"20.2rem",maxHeifht:"20.2rem"}} thumbnail/>
+                    <Image
+                      src={imageSrc}
+                      style={{ minHeight: "20.2rem", maxHeifht: "20.2rem" }}
+                      thumbnail
+                    />
                   ))}
                   <br></br>
                   <br></br>

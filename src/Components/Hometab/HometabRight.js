@@ -1,5 +1,5 @@
 import React from "react";
-import { Nav,Col,Image } from "react-bootstrap";
+import { Nav, Col, Image } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 
@@ -13,46 +13,44 @@ function HometabRight(props) {
       variant="tabs"
       defaultActiveKey={props.activetab}
       className="justify-content-end"
-      fluid
     >
-
-       {/* HOMERIGHT */}
-       <Col md={4} >
-          <Nav.Item>
-            <Nav.Link
-              as={Link}
-              to="/home"
-              style={{ color: "black" }}
-              eventKey="home"
-            >
-              <Image src={Homepic} style={{ width: "1.5rem" }}></Image>
-            </Nav.Link>
-          </Nav.Item>
-        </Col>
-        <Col md={4}>
-          <Nav.Item>
-            <Nav.Link
-              as={Link}
-              to="/changepassword"
-              style={{ color: "black" }}
-              eventKey="changepassword"
-            >
-              <Image src={Padlockpic} style={{ width: "1.5rem" }}></Image>
-            </Nav.Link>
-          </Nav.Item>
-        </Col>
-        <Col md={4} >
-          <Nav.Item className="justify-content-end">
-            <Nav.Link
-              as={Link}
-              to="/search"
-              style={{ color: "black" }}
-              eventKey="search"
-            >
-              <Image src={Searchpic} style={{ width: "1.5rem" }}></Image>
-            </Nav.Link>
-          </Nav.Item>
-        </Col>
+      {/* HOMERIGHT */}
+      <Col md={4}>
+        <Nav.Item>
+          <Nav.Link
+            as={Link}
+            to="/home"
+            style={{ color: "black" }}
+            eventKey="home"
+          >
+            <Image src={Homepic} style={{ width: "1.5rem" }}></Image>
+          </Nav.Link>
+        </Nav.Item>
+      </Col>
+      <Col md={4}>
+        <Nav.Item>
+          <Nav.Link
+            as={Link}
+            to="/changepassword"
+            style={{ color: "black" }}
+            eventKey="changepassword"
+          >
+            <Image src={Padlockpic} style={{ width: "1.5rem" }}></Image>
+          </Nav.Link>
+        </Nav.Item>
+      </Col>
+      <Col md={4}>
+        <Nav.Item className="justify-content-end">
+          <Nav.Link
+            as={Link}
+            to="/search"
+            style={{ color: "black" }}
+            eventKey="search"
+          >
+            <Image src={Searchpic} style={{ width: "1.5rem" }}></Image>
+          </Nav.Link>
+        </Nav.Item>
+      </Col>
     </Nav>
   );
 }

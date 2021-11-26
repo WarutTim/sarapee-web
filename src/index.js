@@ -13,7 +13,7 @@ import ICFPage from "./Pages/ICFPage";
 
 import HomePage from "./Pages/HomePage";
 import SearchPage from "./Pages/SearchPage";
-import RegisterPatienPage from "./Pages/RegisterPatienPage";
+import RegisterPatientPage from "./Pages/RegisterPatientPage";
 
 import InfoPatientPage from "./Pages/InfoPatientPage";
 
@@ -28,7 +28,10 @@ ReactDOM.render(
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/changepassword" element={<ChangePasswordPage />}></Route>
 
-        <Route path="/registerpatien" element={<RegisterPatienPage />}></Route>
+        <Route
+          path="/registerpatient"
+          element={<RegisterPatientPage />}
+        ></Route>
         <Route path="/icf" element={<ICFPage />}></Route>
 
         <Route path="/home" element={<HomePage />}></Route>

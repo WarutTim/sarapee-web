@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container, Form, FloatingLabel, Button, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+import { auth } from "../../Config";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 function LoginForm() {
+  let navigate = useNavigate();
+  const [user, setUser] = useState({});
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
+      navigate("/home")
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <Container
       className="d-grid h-100"
@@ -13,8 +37,12 @@ function LoginForm() {
       <form className="text-center w-50">
         <h1 className="p-3">เข้าสู่ระบบ</h1>
 
-        <FloatingLabel controlId="floatingInputGrid" label="ชื่อผู้ใช้งาน">
+        <FloatingLabel
+          controlId="floatingInputGrid"
+          label="ชื่อผู้ใช้งาน / อีเมล"
+        >
           <Form.Control
+            onChange={(e) => setLoginEmail(e.target.value)}
             type="text"
             placeholder=" "
             style={{ borderRadius: "15px" }}
@@ -23,6 +51,7 @@ function LoginForm() {
         <br></br>
         <FloatingLabel controlId="floatingInputGrid" label="รหัสผ่าน">
           <Form.Control
+            onChange={(e) => setLoginPassword(e.target.value)}
             type="password"
             placeholder=" "
             style={{ borderRadius: "15px" }}
@@ -30,19 +59,20 @@ function LoginForm() {
         </FloatingLabel>
         <br></br>
         <Row>
-          <a href="#" style={{ textDecoration: "none", textAlign: "left" }}>
+          <Link to="#" style={{ textDecoration: "none", textAlign: "left" }}>
             ลืมรหัสผ่าน
-          </a>
+          </Link>
         </Row>
         <br></br>
         <Button
           className="w-50"
           variant="primary"
           style={{ borderRadius: "15px", padding: ".5rem" }}
+          onClick={login}
         >
-          <Link to="/home" style={{ textDecoration: "none" ,color:"white"}}>
-            เข้าสู่ระบบ
-          </Link>
+          {/* <Link to="/home" style={{ textDecoration: "none", color: "white" }}> */}
+          เข้าสู่ระบบ
+          {/* </Link> */}
         </Button>
         <br></br>
         <br></br>

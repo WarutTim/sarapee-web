@@ -1,22 +1,19 @@
 import React from "react";
-import { Container, Nav, Row, Col, Image } from "react-bootstrap";
+import {Nav, Row, Col} from "react-bootstrap";
 
 import { Link } from "react-router-dom";
-
-
 
 function Hometab(props) {
   return (
     <Row>
       <Nav variant="tabs" defaultActiveKey={props.activetab}>
-        <Col md={3}  lg={3}>
+        <Col md={3} lg={3}>
           <Nav.Item>
             <Nav.Link
               as={Link}
-              to="/registerpatien"
+              to="/registerpatient"
               style={{ color: "black" }}
-              eventKey="registerpatien"
-              fluid
+              eventKey="registerpatient"
             >
               ลงทะเบียน
             </Nav.Link>
@@ -58,7 +55,6 @@ function Hometab(props) {
             </Nav.Link>
           </Nav.Item>
         </Col>
-
       </Nav>
     </Row>
   );
