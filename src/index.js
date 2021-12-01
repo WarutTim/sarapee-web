@@ -37,7 +37,10 @@ ReactDOM.render(
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/search" element={<SearchPage />}></Route>
 
-        <Route path="/infopatient" element={<InfoPatientPage />}></Route>
+        <Route
+          path="/infopatient/:userId"
+          element={<InfoPatientPage />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

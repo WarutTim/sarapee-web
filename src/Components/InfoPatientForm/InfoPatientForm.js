@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Col,
@@ -9,9 +9,32 @@ import {
   Button,
 } from "react-bootstrap";
 
+import { useParams } from "react-router-dom";
+
 import ImageBlank from "./img/Profile.png";
 
+import { auth, db } from "../../Config";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  doc,
+  getDoc,
+} from "firebase/firestore";
+
 function InfoPatientForm() {
+  let { userId } = useParams();
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "users");
+
+  useEffect(() => {
+    const unsub = onSnapshot(doc(db, "users", userId), (doc) => {
+      const item = [];
+      item.push(doc.data());
+      setUsers(item);
+    });
+  }, []);
+
   return (
     <Container className="p-3">
       <h4 className="text-center p-3">ข้อมูลผู้พิการ</h4>
@@ -25,36 +48,55 @@ function InfoPatientForm() {
         <Col lg={12}>
           <Row>
             <Col md={4}>
-              <FloatingLabel controlId="floatingInputGrid" label="HN">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel controlId="floatingInputGrid" label="HN">
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.hn}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
+
               <br></br>
             </Col>
             <Col md={4}>
-              <FloatingLabel controlId="floatingInputGrid" label="ชื่อ">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel controlId="floatingInputGrid" label="ชื่อ">
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.fname + " " + user.lname}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
             <Col md={4}>
-              <FloatingLabel controlId="floatingInputGrid" label="ID">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel
+                    controlId="floatingInputGrid"
+                    label="บัตรประชาชน"
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.idCard}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
             <br></br>
@@ -73,103 +115,165 @@ function InfoPatientForm() {
               <br></br>
             </Col>
             <Col md={4}>
-              <FloatingLabel controlId="floatingInputGrid" label="วันเกิด">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel controlId="floatingInputGrid" label="วันเกิด">
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.birthDay}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
             <Col md={4}>
-              <FloatingLabel controlId="floatingInputGrid" label="อายุ">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel controlId="floatingInputGrid" label="อายุ">
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.age}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
           </Row>
 
           <Row>
             <Col md={6}>
-              <FloatingLabel controlId="floatingInputGrid" label="หมู่เลือด">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel
+                    controlId="floatingInputGrid"
+                    label="หมู่เลือด"
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.bloodType}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
             <Col md={6}>
-              <FloatingLabel controlId="floatingInputGrid" label="สถานะ">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel controlId="floatingInputGrid" label="สถานะ">
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.status}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
           </Row>
 
           <Row>
             <Col md={4}>
-              <FloatingLabel controlId="floatingInputGrid" label="ญาติชื่อ">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel controlId="floatingInputGrid" label="ญาติชื่อ">
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.realativeFname + " " + user.realativeLname}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
             <Col md={4}>
-              <FloatingLabel controlId="floatingInputGrid" label="ความสัมพันธ์">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel
+                    controlId="floatingInputGrid"
+                    label="ความสัมพันธ์"
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.realationship}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
             <Col md={4}>
-              <FloatingLabel
-                controlId="floatingInputGrid"
-                label="เบอร์โทรติดต่อ"
-              >
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel
+                    controlId="floatingInputGrid"
+                    label="เบอร์โทรติดต่อ"
+                  >
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={user.telephone}
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
           </Row>
 
           <Row>
             <Col md={12}>
-              <FloatingLabel controlId="floatingInputGrid" label="ที่อยู่">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  style={{ borderRadius: "15px" }}
-                  readOnly
-                />
-              </FloatingLabel>
+              {users.map((user) => {
+                return (
+                  <FloatingLabel controlId="floatingInputGrid" label="ที่อยู่">
+                    <Form.Control
+                      type="text"
+                      placeholder=" "
+                      style={{ borderRadius: "15px" }}
+                      value={
+                        user.address +
+                        " " +
+                        user.swine +
+                        " " +
+                        user.alley +
+                        " " +
+                        user.village +
+                        " " +
+                        user.subDistrict +
+                        " " +
+                        user.district +
+                        " " +
+                        user.province +
+                        " " +
+                        user.postcode
+                      }
+                      readOnly
+                    />
+                  </FloatingLabel>
+                );
+              })}
               <br></br>
             </Col>
           </Row>
@@ -235,26 +339,39 @@ function InfoPatientForm() {
           <br></br>
         </Col>
         <Col md={4}>
-          <FloatingLabel controlId="floatingInputGrid" label="สิทธิรักษา">
-            <Form.Control
-              type="text"
-              placeholder=" "
-              style={{ borderRadius: "15px" }}
-              readOnly
-            />
-          </FloatingLabel>
+          {users.map((user) => {
+            return (
+              <FloatingLabel controlId="floatingInputGrid" label="สิทธิรักษา">
+                <Form.Control
+                  type="text"
+                  placeholder=" "
+                  style={{ borderRadius: "15px" }}
+                  value={user.rightToTreatment}
+                  readOnly
+                />
+              </FloatingLabel>
+            );
+          })}
           <br></br>
         </Col>
 
         <Col md={4}>
-          <FloatingLabel controlId="floatingInputGrid" label="อุปกรณ์ช่วยเดิน">
-            <Form.Control
-              type="text"
-              placeholder=" "
-              style={{ borderRadius: "15px" }}
-              readOnly
-            />
-          </FloatingLabel>
+          {users.map((user) => {
+            return (
+              <FloatingLabel
+                controlId="floatingInputGrid"
+                label="อุปกรณ์ช่วยเดิน"
+              >
+                <Form.Control
+                  type="text"
+                  placeholder=" "
+                  style={{ borderRadius: "15px" }}
+                  value={user.walkingAid}
+                  readOnly
+                />
+              </FloatingLabel>
+            );
+          })}
           <br></br>
         </Col>
         <Col md={4}>
@@ -269,14 +386,22 @@ function InfoPatientForm() {
           <br></br>
         </Col>
         <Col md={4}>
-          <FloatingLabel controlId="floatingInputGrid" label="อุปกรณ์ที่ได้รับ">
-            <Form.Control
-              type="text"
-              placeholder=" "
-              style={{ borderRadius: "15px" }}
-              readOnly
-            />
-          </FloatingLabel>
+          {users.map((user) => {
+            return (
+              <FloatingLabel
+                controlId="floatingInputGrid"
+                label="อุปกรณ์ที่ได้รับ"
+              >
+                <Form.Control
+                  type="text"
+                  placeholder=" "
+                  style={{ borderRadius: "15px" }}
+                  value={user.takeHomeEqu}
+                  readOnly
+                />
+              </FloatingLabel>
+            );
+          })}
           <br></br>
         </Col>
       </Row>

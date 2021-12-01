@@ -23,11 +23,12 @@ function LoginForm() {
         loginEmail,
         loginPassword
       );
-      navigate("/home")
+      navigate("/home");
     } catch (error) {
       console.log(error.message);
     }
   };
+
 
   return (
     <Container

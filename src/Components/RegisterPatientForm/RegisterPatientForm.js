@@ -10,22 +10,22 @@ import {
   Image,
 } from "react-bootstrap";
 
-import { auth } from "../../Config";
+import { auth, db } from "../../Config";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 import ImageBlank from "./img/Profile.png";
 
 function RegisterPatienForm() {
   // Auth
   let navigate = useNavigate();
-  const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
+  const [userAuth, setuserAuth] = useState({});
+  onAuthStateChanged(auth, (currentuserAuth) => {
+    setuserAuth(currentuserAuth);
   });
-
-  if (!user) {
+  if (!userAuth) {
     navigate("/");
   }
 
@@ -45,9 +45,76 @@ function RegisterPatienForm() {
     setImages([...e.target.files]);
   }
 
+  // DB
+  const [users, setUsers] = useState();
+  const usersCollectionRef = collection(db, "users");
+
+  // Data Db
+  const [hnDb, setHnDb] = useState("");
+  const [datePatientCardDb, setDatePatientCardDb] = useState("");
+  const [preFixNameDb, setPrefixNameDb] = useState("นาย");
+  const [idCardDb, setIdCardDb] = useState("");
+  const [birthDayDb, setBirthDayDb] = useState("");
+  const [fnameDb, setFnameDb] = useState("");
+  const [lnameDb, setLnameDb] = useState("");
+  const [ageDb, setAgeDb] = useState("");
+  const [bloodTypeDb, setBloodTypeDb] = useState("O");
+  const [statusDb, setStatusDb] = useState("โสด");
+  const [addressDb, setAddressDb] = useState("");
+  const [swineDb, setSwineDb] = useState("");
+  const [alleyDb, setAlleyDb] = useState("");
+  const [villageDb, setVillageDb] = useState("");
+  const [subDistrictDb, setSubDistrictDb] = useState("ขัวมุง");
+  const [relativePrefixNameDb, setRelativePrefixNameDb] = useState("นาย");
+  const [relativeFnameDb, setRelativeFnameDb] = useState("");
+  const [relativeLnameDb, setRelativeLnameDb] = useState("");
+  const [relationShipDb, setRelationShipDb] = useState("บิดา");
+  const [telephoneDb, setTelephoneDb] = useState("");
+  const [rigthToTreatmentDb, setRigthToTreatmentDb] = useState("ไม่มี"); //สิทธิการรักษา
+  const [drugAllergyDb, setDrugAllergyDb] = useState(""); //แพ้ยา
+  const [congenitalDiseaseDb, setCongenitalDiseaseDb] = useState(""); //โรคประจำตัว
+  const [walkingAidDb, setWalkingAidDb] = useState("ไม่มี");
+  const [takeHomeEquDb, setTakeHomeEquDb] = useState("ไม่มี");
+
+  //Order
+
+  const createUser = async () => {
+    await addDoc(usersCollectionRef, {
+      hn: hnDb,
+      datePatientCard: datePatientCardDb,
+      prefixName: preFixNameDb,
+      fname: fnameDb,
+      lname: lnameDb,
+      idCard: idCardDb,
+      birthDay: birthDayDb,
+      age: ageDb,
+      bloodType: bloodTypeDb,
+      status: statusDb,
+      address: addressDb,
+      swine: swineDb,
+      alley: alleyDb,
+      village: villageDb,
+      subDistrict: subDistrictDb,
+      district: "สารภี",
+      province: "เชียงใหม่",
+      postcode: "50140",
+      relativePrefixName: relativePrefixNameDb,
+      realativeFname: relativeFnameDb,
+      realativeLname: relativeLnameDb,
+      realationship: relationShipDb,
+      telephone: telephoneDb,
+      rigthToTreatment: rigthToTreatmentDb,
+      drugAllergy: drugAllergyDb,
+      congenitalDisease: congenitalDiseaseDb,
+      walkingAid: walkingAidDb,
+      takeHomeEqu: takeHomeEquDb,
+    });
+    alert("บันทึกข้อมูลแล้ว");
+  };
+
   return (
     <Container className="d-grid p-3">
-      <Form id="addUser">
+      <Form>
         <h4>ข้อมูลเวชทะเบียนผู้พิการ</h4>
         <br></br>
         <Row>
@@ -57,6 +124,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setHnDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -70,6 +140,9 @@ function RegisterPatienForm() {
                 type="date"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setDatePatientCardDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -79,10 +152,15 @@ function RegisterPatienForm() {
         <Row>
           <Col lg={3}>
             <FloatingLabel controlId="floatingSelect" label="คำนำหน้าชื่อ">
-              <Form.Select style={{ borderRadius: "15px" }}>
-                <option>นาย</option>
-                <option>นาง</option>
-                <option>นางสาว</option>
+              <Form.Select
+                style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setPrefixNameDb(e.target.value);
+                }}
+              >
+                <option value="นาย">นาย</option>
+                <option value="นาง">นาง</option>
+                <option value="นางสาว">นางสาว</option>
               </Form.Select>
             </FloatingLabel>
             <br></br>
@@ -95,6 +173,9 @@ function RegisterPatienForm() {
                 name="fname"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setFnameDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -107,6 +188,9 @@ function RegisterPatienForm() {
                 name="lname"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setLnameDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -117,6 +201,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setIdCardDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -130,6 +217,9 @@ function RegisterPatienForm() {
                 type="date"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setBirthDayDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -141,6 +231,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setAgeDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -148,20 +241,30 @@ function RegisterPatienForm() {
 
           <Col lg={3}>
             <FloatingLabel controlId="floatingSelect" label="หมู่เลือด">
-              <Form.Select style={{ borderRadius: "15px" }}>
-                <option>O</option>
-                <option>A</option>
-                <option>B</option>
-                <option>AB</option>
+              <Form.Select
+                style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setBloodTypeDb(e.target.value);
+                }}
+              >
+                <option value="O">O</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="AB">AB</option>
               </Form.Select>
             </FloatingLabel>
             <br></br>
           </Col>
           <Col lg={3}>
             <FloatingLabel controlId="floatingSelect" label="สถานภาพ">
-              <Form.Select style={{ borderRadius: "15px" }}>
-                <option>โสด</option>
-                <option>สมรส</option>
+              <Form.Select
+                style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setStatusDb(e.target.value);
+                }}
+              >
+                <option value="โสด">โสด</option>
+                <option value="สมรส">สมรส</option>
               </Form.Select>
             </FloatingLabel>
             <br></br>
@@ -179,6 +282,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setAddressDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -190,6 +296,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setSwineDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -201,6 +310,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setAlleyDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -212,6 +324,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setVillageDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -221,19 +336,24 @@ function RegisterPatienForm() {
         <Row>
           <Col lg={3}>
             <FloatingLabel controlId="floatingSelect" label="ตำบล">
-              <Form.Select style={{ borderRadius: "15px" }}>
-                <option>ขัวมุง</option>
-                <option>ชมภู</option>
-                <option>ไชยสถาน</option>
-                <option>ดอนแก้ว</option>
-                <option>ท่ากว้าง</option>
-                <option>ท่าวังตาล</option>
-                <option>ป่าบง</option>
-                <option>ยางเนิ้ง</option>
-                <option>สันทราย</option>
-                <option>สารภี</option>
-                <option>หนองผึ้ง</option>
-                <option>หนองแฝก</option>
+              <Form.Select
+                style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setSubDistrictDb(e.target.value);
+                }}
+              >
+                <option value="ขัวมุง">ขัวมุง</option>
+                <option value="ชมภู">ชมภู</option>
+                <option value="ไชยสถาน">ไชยสถาน</option>
+                <option value="ดอนแก้ว">ดอนแก้ว</option>
+                <option value="ท่ากว้าง">ท่ากว้าง</option>
+                <option value="ท่าวังตาล">ท่าวังตาล</option>
+                <option value="ป่าบง">ป่าบง</option>
+                <option value="ยางเนิ้ง">ยางเนิ้ง</option>
+                <option value="สันทราย">สันทราย</option>
+                <option value="สารภี">สารภี</option>
+                <option value="หนองผึ้ง">หนองผึ้ง</option>
+                <option value="หนองแฝก">หนองแฝก</option>
               </Form.Select>
             </FloatingLabel>
             <br></br>
@@ -269,7 +389,9 @@ function RegisterPatienForm() {
               <Form.Control
                 type="text"
                 placeholder=" "
+                value="50140"
                 style={{ borderRadius: "15px" }}
+                readOnly
               />
             </FloatingLabel>
             <br></br>
@@ -283,10 +405,15 @@ function RegisterPatienForm() {
         <Row>
           <Col lg={3}>
             <FloatingLabel controlId="floatingSelect" label="คำนำหน้าชื่อ">
-              <Form.Select style={{ borderRadius: "15px" }}>
-                <option>นาย</option>
-                <option>นาง</option>
-                <option>นางสาว</option>
+              <Form.Select
+                style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setRelativePrefixNameDb(e.target.value);
+                }}
+              >
+                <option value="นาย">นาย</option>
+                <option value="นาง">นาง</option>
+                <option value="นางสาว">นางสาว</option>
               </Form.Select>
             </FloatingLabel>
             <br></br>
@@ -298,6 +425,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setRelativeFnameDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -309,6 +439,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setRelativeLnameDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -316,10 +449,15 @@ function RegisterPatienForm() {
 
           <Col lg={3}>
             <FloatingLabel controlId="floatingSelect" label="ความสัมพันธ์">
-              <Form.Select style={{ borderRadius: "15px" }}>
-                <option>บิดา</option>
-                <option>มารดา</option>
-                <option>ผู้ปกครอง</option>
+              <Form.Select
+                style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setRelationShipDb(e.target.value);
+                }}
+              >
+                <option value="บิดา">บิดา</option>
+                <option value="มารดา">มารดา</option>
+                <option value="ผู้ปกครอง">ผู้ปกครอง</option>
               </Form.Select>
             </FloatingLabel>
             <br></br>
@@ -333,6 +471,9 @@ function RegisterPatienForm() {
                 type="text"
                 placeholder=" "
                 style={{ borderRadius: "15px" }}
+                onChange={(e) => {
+                  setTelephoneDb(e.target.value);
+                }}
               />
             </FloatingLabel>
             <br></br>
@@ -380,21 +521,40 @@ function RegisterPatienForm() {
               <Card.Body>
                 <Col>
                   <FloatingLabel controlId="floatingSelect" label="สิทธิรักษา">
-                    <Form.Select style={{ borderRadius: "15px" }}>
-                      <option>ไม่มี</option>
-                      <option>UCF (สิทธิบัตรทอง)</option>
-                      <option>OFC (สิทธิข้าราชการ)</option>
-                      <option>SSS (สิทธิประกันสังคม)</option>
-                      <option>LGO (สิทธิ อปท)</option>
-                      <option>SSI (สิทธิประกันสังคมทุพพลภาพ)</option>
-                      <option>อื่น ๆ</option>
+                    <Form.Select
+                      style={{ borderRadius: "15px" }}
+                      onChange={(e) => {
+                        setRigthToTreatmentDb(e.target.value);
+                      }}
+                    >
+                      <option value="ไม่มี">ไม่มี</option>
+                      <option value="UCF (สิทธิบัตรทอง)">
+                        UCF (สิทธิบัตรทอง)
+                      </option>
+                      <option value="OFC (สิทธิข้าราชการ)">
+                        OFC (สิทธิข้าราชการ)
+                      </option>
+                      <option value="SSS (สิทธิประกันสังคม)">
+                        SSS (สิทธิประกันสังคม)
+                      </option>
+                      <option value="LGO (สิทธิ อปท)">LGO (สิทธิ อปท)</option>
+                      <option value="SSI (สิทธิประกันสังคมทุพพลภาพ)">
+                        SSI (สิทธิประกันสังคมทุพพลภาพ)
+                      </option>
+                      <option value="อื่น ๆ">อื่น ๆ</option>
                     </Form.Select>
                   </FloatingLabel>
                   <br></br>
                 </Col>
 
                 <Col>
-                  <FloatingLabel controlId="floatingInputGrid" label="แพ้ยา">
+                  <FloatingLabel
+                    controlId="floatingInputGrid"
+                    label="แพ้ยา"
+                    onChange={(e) => {
+                      setDrugAllergyDb(e.target.value);
+                    }}
+                  >
                     <Form.Control
                       type="text"
                       placeholder=" "
@@ -408,6 +568,9 @@ function RegisterPatienForm() {
                   <FloatingLabel
                     controlId="floatingInputGrid"
                     label="โรคประจำตัว"
+                    onChange={(e) => {
+                      setCongenitalDiseaseDb(e.target.value);
+                    }}
                   >
                     <Form.Control
                       type="text"
@@ -422,12 +585,15 @@ function RegisterPatienForm() {
                   <FloatingLabel
                     controlId="floatingSelect"
                     label="อุปกรณ์ช่วยเดิน"
+                    onChange={(e) => {
+                      setWalkingAidDb(e.target.value);
+                    }}
                   >
                     <Form.Select style={{ borderRadius: "15px" }}>
-                      <option>ไม่มี</option>
-                      <option>Tripod</option>
-                      <option>Wheel Chair</option>
-                      <option>Walker</option>
+                      <option value="ไม่มี">ไม่มี</option>
+                      <option value="Tripod">Tripod</option>
+                      <option value="Wheel Chair">Wheel Chair</option>
+                      <option value="Walker">Walker</option>
                     </Form.Select>
                   </FloatingLabel>
                   <br></br>
@@ -437,19 +603,24 @@ function RegisterPatienForm() {
                   <FloatingLabel
                     controlId="floatingSelect"
                     label="อุปกรณ์ติดตัวกลับบ้าน"
+                    onChange={(e) => {
+                      setTakeHomeEquDb(e.target.value);
+                    }}
                   >
                     <Form.Select style={{ borderRadius: "15px" }}>
-                      <option>ไม่มี</option>
-                      <option>NG</option>
-                      <option>FOLEY</option>
-                      <option>Trancheaostomy</option>
-                      <option>Colostomy</option>
-                      <option>Skintraction</option>
-                      <option>Bipap</option>
-                      <option>Syringdriver</option>
-                      <option>เครื่องผลิต O2</option>
-                      <option>เครื่อง Suction</option>
-                      <option>อื่น ๆ</option>
+                      <option value="ไม่มี">ไม่มี</option>
+                      <option value="NG">NG</option>
+                      <option value="FOLEY">FOLEY</option>
+                      <option value="Trancheaostomy">Trancheaostomy</option>
+                      <option value="Colostomy">Colostomy</option>
+                      <option value="Skintraction">Skintraction</option>
+                      <option value="Bipap">Bipap</option>
+                      <option value="Syringdriver">Syringdriver</option>
+                      <option value="เครื่องผลิต Oxygen">
+                        เครื่องผลิต Oxygen
+                      </option>
+                      <option value="เครื่อง Suction">เครื่อง Suction</option>
+                      <option value="อื่น ๆ">อื่น ๆ</option>
                     </Form.Select>
                   </FloatingLabel>
                   <br></br>
@@ -502,7 +673,7 @@ function RegisterPatienForm() {
               <Button
                 className="w-100"
                 variant="primary"
-                type="submit"
+                onClick={createUser}
                 style={{
                   borderRadius: "15px",
                   padding: "1.1rem",

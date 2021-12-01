@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import {
   Container,
@@ -12,7 +12,23 @@ import {
 
 import { Link } from "react-router-dom";
 
+import { auth, db } from "../../Config";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 function SearchForm() {
+  // DB
+  const [users, setUsers] = useState([]);
+  const usersCollectionRef = collection(db, "users");
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getUsers();
+  }, []);
+
+  // Get DB ID
+
   return (
     <Container className="p-3">
       <Row>
@@ -53,30 +69,37 @@ function SearchForm() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <Button
-                    className="w-100"
-                    variant="primary"
-                    style={{ borderRadius: "15px", padding: ".5rem" }}
-                  >
-                    <Link
-                      to="/infopatient"
-                      style={{ textDecoration: "none", color: "white" }}
-                    >
-                      ดูข้อมูล
-                    </Link>
-                  </Button>
-                </td>
-              </tr>
+              {users.map((user) => {
+                return (
+                  <tr>
+                    <td></td>
+                    <td>{user.idCard}</td>
+                    <td>{user.subDistrict}</td>
+                    <td>
+                      {user.fname} {user.lname}
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <Button
+                        className="w-100"
+                        variant="primary"
+                        style={{ borderRadius: "15px", padding: ".5rem" }}
+                      >
+                        <Link
+                          to={`/infopatient/${user.id}`}
+                          activeClassName="active"
+                          style={{ textDecoration: "none", color: "white" }}
+                        >
+                          ดูข้อมูล
+                        </Link>
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </Table>
         </Col>
